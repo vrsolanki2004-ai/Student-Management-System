@@ -1,4 +1,5 @@
 
+
 import os
 
 from django.contrib.auth import get_user_model
@@ -6,7 +7,7 @@ from django.core.management.base import BaseCommand, CommandError
 
 
 class Command(BaseCommand):
-    help = "Create the initial Render user securely"
+    help = "Create or update the initial Render admin user"
 
     def handle(self, *args, **options):
         username = os.environ.get("RENDER_ADMIN_USERNAME")
@@ -19,17 +20,20 @@ class Command(BaseCommand):
             )
 
         User = get_user_model()
-
-        if User.objects.filter(username=username).exists():
-            self.stdout.write("User already exists; no changes made.")
-            return
-
-        User.objects.create_superuser(
+        user, created = User.objects.get_or_create(
             username=username,
-            email="",
-            password=password,
+            defaults={"email": ""},
         )
+
+        user.is_active = True
+        user.is_staff = True
+        user.is_superuser = True
+        user.set_password(password)
+        user.save()
 
         self.stdout.write(
-            self.style.SUCCESS("Render admin user created.")
+            self.style.SUCCESS(
+                f"Render admin user {'created' if created else 'updated'}."
+            )
         )
+
