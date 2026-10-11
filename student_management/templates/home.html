@@ -196,8 +196,90 @@
         </p>
     </section>
 
-    <footer>
-        <p>Student Management System | Developed by Vivek Solanki</p>
-    </footer>
+    
+<section class="section" id="api-guide">
+    <h2>How to Test the API</h2>
+    <p class="tech" style="margin-bottom: 25px;">
+        Follow these steps using Postman or Thunder Client in VS Code.
+    </p>
+
+    <div class="cards">
+        <div class="card">
+            <h3>1. Register a User</h3>
+            <p>Send a POST request to register a test account.</p>
+            <p style="margin-top: 12px;">
+                <strong>Endpoint:</strong><br>
+                <code>/api/register/</code>
+            </p>
+            <p style="margin-top: 12px;"><strong>Body (JSON):</strong></p>
+            <pre style="white-space: pre-wrap; overflow-wrap: anywhere; color: #bae6fd;">{
+  "username": "demo_user",
+  "email": "demo@example.com",
+  "password": "DemoUser@2026Strong"
+}</pre>
+        </div>
+
+        <div class="card">
+            <h3>2. Login</h3>
+            <p>Send a POST request with the registered username and password.</p>
+            <p style="margin-top: 12px;">
+                <strong>Endpoint:</strong><br>
+                <code>/api/login/</code>
+            </p>
+            <p style="margin-top: 12px;"><strong>Body (JSON):</strong></p>
+            <pre style="white-space: pre-wrap; overflow-wrap: anywhere; color: #bae6fd;">{
+  "username": "demo_user",
+  "password": "DemoUser@2026Strong"
+}</pre>
+            <p style="margin-top: 12px;">
+                Copy the returned <code>access</code> token for the next request.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>3. Retrieve Students</h3>
+            <p>Send a GET request with your JWT access token.</p>
+            <p style="margin-top: 12px;">
+                <strong>Endpoint:</strong><br>
+                <code>/api/students/</code>
+            </p>
+            <p style="margin-top: 12px;">
+                In the Auth tab, select Bearer Token and paste your access token.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>4. Test Permissions</h3>
+            <p>Log in as a normal user and try creating, updating, or deleting a student.</p>
+            <p style="margin-top: 12px;">
+                <strong>Expected result:</strong><br>
+                <code>403 Forbidden</code>
+            </p>
+            <p style="margin-top: 12px;">
+                Use an existing student ID for update tests. Do not delete real records.
+            </p>
+        </div>
+    </div>
+
+    <div class="buttons" style="margin-top: 30px;">
+        <a class="btn primary"
+           href="https://github.com/vrsolanki2004-ai/Student-Management-System"
+           target="_blank" rel="noopener noreferrer">
+            View Code & README ↗
+        </a>
+        <a class="btn secondary"
+           href="/api/students/"
+           target="_blank" rel="noopener noreferrer">
+            Open Students API →
+        </a>
+    </div>
+</section>
+
+<footer>
+    <p>Student Management System | Developed by Vivek Solanki</p>
+</footer>
+</body>
+</html>
+
 </body>
 </html>
